@@ -1,0 +1,16 @@
+{
+  "name": "Classicmanda",
+  "short_name": "Classicmanda",
+  "description": "Premium products for your home and business",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#D4AF37",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
