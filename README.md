@@ -1,18 +1,27 @@
-# sv
+# ClassicManda E-Commerce Demo
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern e-commerce website built with SvelteKit, featuring a luxury gold theme and comprehensive product management.
 
-## Creating a project
+## ⚠️ IMPORTANT DISCLAIMER
 
-If you're seeing this, you've probably already done this step. Congrats!
+**This is a demo/template project for educational and development purposes only.**
 
-```sh
-# create a new project in the current directory
-npx sv create
+- All contact information (email, phone, address) is **FICTIONAL**
+- The address "624 Skyland Blvd E, Tuscaloosa, Alabama 35405, United States" is a **RANDOM EXAMPLE** and does not represent any real business
+- All product data, prices, and business information are for demonstration purposes
+- This code is provided under the MIT License for anyone to use, modify, and distribute
 
-# create a new project in my-app
-npx sv create my-app
-```
+## Features
+
+- 🎨 Luxury gold theme with responsive design
+- 🛒 Complete e-commerce functionality (cart, checkout, products)
+- 📱 Mobile-first responsive design
+- 🔍 Product search and filtering
+- 📊 Admin panel for product management
+- 🚀 Built with SvelteKit and Tailwind CSS
+- ⚡ Svelte 5 Runes for reactive state management
+
+## Getting Started
 
 ## Developing
 
