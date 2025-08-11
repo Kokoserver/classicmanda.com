@@ -3,8 +3,8 @@ import type { RequestHandler } from './$types';
 import type { AdminConfig } from '$lib/utils/adminConfig';
 import defaultConfigData from '$lib/assets/default-admin-config.json';
 
-// Use static directory so SvelteKit won't overwrite it
-const CONFIG_FILE_PATH = './static/admin-config.json';
+// Use only the default config file for consistency
+const CONFIG_FILE_PATH = './src/lib/assets/default-admin-config.json';
 
 // In-memory fallback for when file operations fail
 let memoryConfig: AdminConfig | null = null;

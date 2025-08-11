@@ -1,4 +1,4 @@
-# ClassicManda E-Commerce Demo
+# Velvetsupply E-Commerce Demo
 
 A modern e-commerce website built with SvelteKit, featuring a luxury gold theme and comprehensive product management.
 

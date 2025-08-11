@@ -65,10 +65,10 @@
 </script>
 
 <svelte:head>
-	<title>Classicmanda - Premium Products for Your Home & Business</title>
+	<title>Velvet supply - Premium Products for Your Home & Business</title>
 	<meta
 		name="description"
-		content="Discover premium solar panels, dishwashers, chandeliers, building materials, and tools at Classicmanda. Quality products for your home and business needs."
+		content="Discover premium solar panels, dishwashers, chandeliers, building materials, and tools at Velvet supply. Quality products for your home and business needs."
 	/>
 </svelte:head>
 

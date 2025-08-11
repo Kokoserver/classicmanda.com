@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Card from '$lib/components/ui/Card.svelte';
 	import { adminConfigStore } from '$lib/stores/adminConfig.js';
+	import { getFullAddress } from '$lib/utils/adminConfig.js';
 
 	let siteConfig = $state<any>(null);
 
@@ -12,8 +13,8 @@
 </script>
 
 <svelte:head>
-	<title>Privacy Policy - Classicmanda</title>
-	<meta name="description" content="Classicmanda's privacy policy and data protection information." />
+	<title>Privacy Policy - Velvet supply</title>
+	<meta name="description" content="Velvet supply's privacy policy and data protection information." />
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8">
@@ -29,7 +30,7 @@
 			<div class="prose prose-gray max-w-none">
 				<h2>Introduction</h2>
 				<p>
-					Welcome to Classicmanda. We respect your privacy and are committed to protecting your personal data. 
+					Welcome to Velvet supply. We respect your privacy and are committed to protecting your personal data. 
 					This privacy policy will inform you about how we look after your personal data when you visit our 
 					website and tell you about your privacy rights.
 				</p>
@@ -122,7 +123,7 @@
 					<ul>
 						<li>Email: {siteConfig.contact.email}</li>
 						<li>Phone: {siteConfig.contact.phone}</li>
-						<li>Address: {siteConfig.contact.address.full}</li>
+						<li>Address: {getFullAddress(siteConfig.contact.address)}</li>
 					</ul>
 				{/if}
 

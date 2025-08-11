@@ -106,8 +106,8 @@
 </script>
 
 <svelte:head>
-	<title>Checkout - Classicmanda</title>
-	<meta name="description" content="Complete your order with Classicmanda." />
+	<title>Checkout - Velvet supply</title>
+	<meta name="description" content="Complete your order with Velvet supply." />
 </svelte:head>
 
 <div class="container mx-auto px-4 py-8">

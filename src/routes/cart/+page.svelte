@@ -38,7 +38,7 @@
 </script>
 
 <svelte:head>
-	<title>Shopping Cart - Classicmanda</title>
+	<title>Shopping Cart - Velvet supply</title>
 	<meta name="description" content="Review your selected products and proceed to checkout." />
 </svelte:head>
 

@@ -266,8 +266,8 @@
 </script>
 
 <svelte:head>
-	<title>Admin Panel - Classicmanda</title>
-	<meta name="description" content="Admin panel for managing Classicmanda products." />
+	<title>Admin Panel - Velvet supply</title>
+	<meta name="description" content="Admin panel for managing Velvet supply products." />
 </svelte:head>
 
 <div class="min-h-screen bg-gradient-to-br from-luxury-cream to-white">
@@ -319,7 +319,7 @@
 						</div>
 						<div>
 							<h1 class="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Admin Panel</h1>
-							<p class="text-luxury-navy/70 font-medium">Manage ClassicManda Products</p>
+							<p class="text-luxury-navy/70 font-medium">Manage Velvet supply Products</p>
 						</div>
 					</div>
 					<Button 
@@ -634,7 +634,7 @@
 									Adding Product...
 								{:else}
 									<Upload class="h-5 w-5 mr-3" />
-									Add Product to ClassicManda
+									Add Product to Velvet supply
 								{/if}
 							</Button>
 						</div>
@@ -735,7 +735,7 @@
 										<label for="email" class="block text-sm font-semibold mb-2 text-gray-700">Email Address</label>
 										<Input 
 											bind:value={adminConfig.contact.email}
-											placeholder="info@classicmanda.com"
+											placeholder="info@velvetsupply.com"
 											class="h-12 border-2 border-purple-200 focus:border-purple-500"
 										/>
 									</div>
@@ -771,6 +771,24 @@
 											<Input 
 												bind:value={adminConfig.contact.address.state}
 												placeholder="Alabama"
+												class="h-12 border-2 border-purple-200 focus:border-purple-500"
+											/>
+										</div>
+									</div>
+									<div class="grid grid-cols-2 gap-4">
+										<div>
+											<label for="zipCode" class="block text-sm font-semibold mb-2 text-gray-700">Zip Code</label>
+											<Input 
+												bind:value={adminConfig.contact.address.zipCode}
+												placeholder="35405"
+												class="h-12 border-2 border-purple-200 focus:border-purple-500"
+											/>
+										</div>
+										<div>
+											<label for="country" class="block text-sm font-semibold mb-2 text-gray-700">Country</label>
+											<Input 
+												bind:value={adminConfig.contact.address.country}
+												placeholder="United States"
 												class="h-12 border-2 border-purple-200 focus:border-purple-500"
 											/>
 										</div>

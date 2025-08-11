@@ -163,7 +163,7 @@
 </script>
 
 <svelte:head>
-	<title>Products - Classicmanda</title>
+	<title>Products - Velvet supply</title>
 	<meta name="description" content="Browse our complete collection of premium products including solar panels, dishwashers, chandeliers, building materials, and tools." />
 </svelte:head>
 

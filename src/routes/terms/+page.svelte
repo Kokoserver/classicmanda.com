@@ -7,10 +7,10 @@
 </script>
 
 <svelte:head>
-	<title>Terms of Service - Classicmanda</title>
+	<title>Terms of Service - Velvet supply</title>
 	<meta
 		name="description"
-		content="Terms of Service for Classicmanda - Premium products for your home and business."
+		content="Terms of Service for Velvet supply - Premium products for your home and business."
 	/>
 </svelte:head>
 
@@ -28,14 +28,14 @@
 		<section class="mb-8">
 			<h2 class="text-2xl font-semibold mb-4">1. Agreement to Terms</h2>
 			<p class="mb-4">
-				By accessing and using Classicmanda's website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+				By accessing and using Velvet supply's website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
 			</p>
 		</section>
 
 		<section class="mb-8">
 			<h2 class="text-2xl font-semibold mb-4">2. About Our Services</h2>
 			<p class="mb-4">
-				Classicmanda is an e-commerce platform that provides premium products including solar panels, dishwashers, chandeliers, building materials, and tools for homes and businesses across Nigeria.
+				Velvet supply is an e-commerce platform that provides premium products including solar panels, dishwashers, chandeliers, building materials, and tools for homes and businesses across Nigeria.
 			</p>
 			<p class="mb-4">
 				We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice.
@@ -55,7 +55,7 @@
 		<section class="mb-8">
 			<h2 class="text-2xl font-semibold mb-4">4. Orders and Payment</h2>
 			<p class="mb-4">
-				When you place an order through our website, you are making an offer to purchase products. All orders are subject to acceptance by Classicmanda.
+				When you place an order through our website, you are making an offer to purchase products. All orders are subject to acceptance by Velvet supply.
 			</p>
 			<p class="mb-4">
 				We do not process online payments. Our team will contact you after order placement to confirm details and arrange payment and delivery.
@@ -78,10 +78,10 @@
 		<section class="mb-8">
 			<h2 class="text-2xl font-semibold mb-4">6. Returns and Warranties</h2>
 			<p class="mb-4">
-				Product warranties are provided by the respective manufacturers. Classicmanda will assist in warranty claims and returns as per manufacturer policies.
+				Product warranties are provided by the respective manufacturers. Velvet supply will assist in warranty claims and returns as per manufacturer policies.
 			</p>
 			<p class="mb-4">
-				Returns must be authorized by Classicmanda and may be subject to restocking fees. Products must be in original condition and packaging.
+				Returns must be authorized by Velvet supply and may be subject to restocking fees. Products must be in original condition and packaging.
 			</p>
 		</section>
 
@@ -109,14 +109,14 @@
 		<section class="mb-8">
 			<h2 class="text-2xl font-semibold mb-4">9. Intellectual Property</h2>
 			<p class="mb-4">
-				The service and its original content, features, and functionality are and will remain the exclusive property of Classicmanda and its licensors. The service is protected by copyright, trademark, and other laws.
+				The service and its original content, features, and functionality are and will remain the exclusive property of Velvet supply and its licensors. The service is protected by copyright, trademark, and other laws.
 			</p>
 		</section>
 
 		<section class="mb-8">
 			<h2 class="text-2xl font-semibold mb-4">10. Limitation of Liability</h2>
 			<p class="mb-4">
-				In no event shall Classicmanda, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the service.
+				In no event shall Velvet supply, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the service.
 			</p>
 		</section>
 
@@ -143,7 +143,7 @@
 
 		<div class="text-center mt-12 pt-8 border-t">
 			<p class="text-muted-foreground">
-				Thank you for choosing Classicmanda for your premium product needs.
+				Thank you for choosing Velvet supply for your premium product needs.
 			</p>
 			<a href="/" class="inline-block mt-4 text-primary hover:underline">
 				← Return to Home

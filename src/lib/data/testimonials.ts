@@ -16,7 +16,7 @@ export const testimonials: Testimonial[] = [
 		name: 'Sarah Johnson',
 		role: 'Homeowner',
 		location: 'Lagos, Nigeria',
-		content: 'The solar panels from Classicmanda have completely transformed our energy bills. Professional installation and excellent quality products. Highly recommended!',
+		content: 'The solar panels from Velvet supply have completely transformed our energy bills. Professional installation and excellent quality products. Highly recommended!',
 		rating: 5,
 		productCategory: 'Solar Panels',
 		image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face'
@@ -38,7 +38,7 @@ export const testimonials: Testimonial[] = [
 		role: 'Interior Designer',
 		company: 'Elegant Spaces Design',
 		location: 'Kano, Nigeria',
-		content: 'Classicmanda has the most beautiful chandelier collection. My clients are always impressed with the quality and design. Perfect for luxury projects.',
+		content: 'Velvet supply has the most beautiful chandelier collection. My clients are always impressed with the quality and design. Perfect for luxury projects.',
 		rating: 5,
 		productCategory: 'Chandeliers',
 		image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face'
@@ -49,7 +49,7 @@ export const testimonials: Testimonial[] = [
 		role: 'Construction Manager',
 		company: 'BuildRight Construction',
 		location: 'Port Harcourt, Nigeria',
-		content: 'Reliable building materials and tools at competitive prices. Fast delivery and excellent customer service. Classicmanda is our go-to supplier.',
+		content: 'Reliable building materials and tools at competitive prices. Fast delivery and excellent customer service. Velvet supply is our go-to supplier.',
 		rating: 4,
 		productCategory: 'Building Materials',
 		image: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=face'
@@ -69,7 +69,7 @@ export const testimonials: Testimonial[] = [
 		role: 'Electrician',
 		company: 'PowerTech Solutions',
 		location: 'Kaduna, Nigeria',
-		content: 'Professional grade tools and electrical equipment. Classicmanda provides everything I need for my electrical projects. Quality you can trust.',
+		content: 'Professional grade tools and electrical equipment. Velvet supply provides everything I need for my electrical projects. Quality you can trust.',
 		rating: 4,
 		productCategory: 'Tools',
 		image: 'https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=150&h=150&fit=crop&crop=face'

@@ -1,26 +1,25 @@
 {
   "company": {
-    "name": "Classic Manda",
+    "name": "Velvet supply",
     "tagline": "Timeless Elegance, Modern Style",
     "description": "Your premier destination for classic and contemporary fashion"
   },
   "contact": {
-    "email": "info@classicmanda.com",
+    "email": "info@velvetsupply.com",
     "phone": "+1 (205) 852-7810",
     "address": {
-      "street": "624 Skyland Blvd E",
-      "city": "Tuscaloosa",
-      "state": "Alabama",
-      "zipCode": "35405",
-      "country": "United States",
-      "full": "624 Skyland Blvd E, Tuscaloosa, Alabama 35405, United States"
+      "street": "624 Skyland Blvd A",
+      "city": "Tuscaloosa1",
+      "state": "Alabama11",
+      "zipCode": "35407",
+      "country": "United States"
     }
   },
   "social": {
-    "facebook": "https://facebook.com/classicmanda",
-    "instagram": "https://instagram.com/classicmanda",
-    "twitter": "https://twitter.com/classicmanda",
-    "linkedin": "https://linkedin.com/company/classicmanda"
+    "facebook": "https://facebook.com/velvetsupply",
+    "instagram": "https://instagram.com/velvetsupply",
+    "twitter": "https://twitter.com/velvetsupply",
+    "linkedin": "https://linkedin.com/company/velvetsupply"
   },
   "business": {
     "hours": {
@@ -65,6 +64,6 @@
     "maintenanceMessage": "We're currently performing scheduled maintenance. Please check back soon!",
     "estimatedDowntime": "2 hours"
   },
-  "lastUpdated": "2024-01-01T00:00:00.000Z",
+  "lastUpdated": "2025-08-11T10:12:07.562Z",
   "version": "1.0.0"
 }

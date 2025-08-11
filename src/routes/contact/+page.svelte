@@ -7,6 +7,7 @@
 	import Card from '$lib/components/ui/Card.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
 	import { adminConfigStore } from '$lib/stores/adminConfig.js';
+	import { getFullAddress } from '$lib/utils/adminConfig.js';
 	import { Mail, Phone, MapPin, Send, CircleCheckBig } from 'lucide-svelte';
 
 	let siteConfig = $state<any>(null);
@@ -89,10 +90,10 @@
 </script>
 
 <svelte:head>
-	<title>Contact Us - Classicmanda</title>
+	<title>Contact Us - Velvet supply</title>
 	<meta
 		name="description"
-		content="Get in touch with Classicmanda for any questions about our products or services."
+		content="Get in touch with Velvet supply for any questions about our products or services."
 	/>
 </svelte:head>
 
@@ -143,7 +144,7 @@
 								<div>
 									<p class="font-medium">Address</p>
 									<p class="text-muted-foreground">
-										{siteConfig.contact.address.full}
+										{getFullAddress(siteConfig.contact.address)}
 									</p>
 								</div>
 							</div>

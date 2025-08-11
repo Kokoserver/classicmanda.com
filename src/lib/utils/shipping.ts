@@ -30,7 +30,7 @@ class ShippingManager {
 
 	private loadFromStorage(): void {
 		if (typeof window !== 'undefined') {
-			const stored = localStorage.getItem('classicmanda-shipping');
+			const stored = localStorage.getItem('velvetsupply-shipping');
 			if (stored) {
 				const data = JSON.parse(stored);
 				this.orderCount = data.orderCount || 0;
@@ -42,7 +42,7 @@ class ShippingManager {
 
 	private saveToStorage(): void {
 		if (typeof window !== 'undefined') {
-			localStorage.setItem('classicmanda-shipping', JSON.stringify({
+			localStorage.setItem('velvetsupply-shipping', JSON.stringify({
 				orderCount: this.orderCount,
 				currentThreshold: this.currentThreshold,
 				lastUpdate: this.lastUpdate

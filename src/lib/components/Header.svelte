@@ -37,7 +37,7 @@
 		<div class="flex h-20 items-center justify-between">
 			<!-- Logo -->
 			<a href="/" class="flex items-center space-x-2">
-				<img src="/logo.svg" alt="Classicmanda" class="h-14 w-auto" />
+				<img src="/logo.svg" alt="Velvetsupply" class="h-14 w-auto" />
 			</a>
 
 			<!-- Desktop Navigation -->

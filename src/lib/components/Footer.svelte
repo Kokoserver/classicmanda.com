@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { adminConfigStore } from '$lib/stores/adminConfig.js';
+	import { getFullAddress } from '$lib/utils/adminConfig.js';
 	import { Mail, Phone, MapPin } from 'lucide-svelte';
 
 	// Use reactive store for admin config
@@ -17,7 +18,7 @@
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 			<!-- Company Info -->
 			<div class="space-y-4">
-				<img src="/logo.svg" alt={siteConfig?.companyName || 'Classicmanda'} class="h-12 w-auto" />
+				<img src="/logo.svg" alt={siteConfig?.companyName || 'Velvetsupply'} class="h-12 w-auto" />
 				<p class="text-sm text-muted-foreground">
 					{siteConfig?.companyDescription || 'Premium products for your home and business'}
 				</p>
@@ -33,7 +34,7 @@
 						</div>
 						<div class="flex items-start space-x-2 text-sm">
 							<MapPin class="h-6 w-6 mt-0.5" />
-							<span>{siteConfig.contact.address.full}</span>
+							<span>{getFullAddress(siteConfig.contact.address)}</span>
 						</div>
 					</div>
 				{/if}
@@ -125,7 +126,7 @@
 
 		<div class="border-t mt-8 pt-8 text-center">
 			<p class="text-sm text-muted-foreground">
-				© {new Date().getFullYear()} Classicmanda. All rights reserved.
+				© {new Date().getFullYear()} Velvet supply. All rights reserved.
 			</p>
 		</div>
 	</div>

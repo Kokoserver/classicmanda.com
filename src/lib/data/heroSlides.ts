@@ -13,7 +13,7 @@ export interface HeroSlide {
 export const heroSlides: HeroSlide[] = [
 	{
 		id: '1',
-		title: 'Welcome to Classicmanda',
+		title: 'Welcome to Velvet supply',
 		subtitle: 'Premium Products for Your Home & Business',
 		description: 'Discover premium products for your home and business. From solar panels to chandeliers, we have everything you need.',
 		backgroundImage: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&h=1080&fit=crop&crop=center&q=80',

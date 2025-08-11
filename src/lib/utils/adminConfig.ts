@@ -15,7 +15,6 @@ export interface AdminConfig {
       state: string;
       zipCode: string;
       country: string;
-      full: string;
     };
   };
   social: {
@@ -66,27 +65,26 @@ export interface AdminConfig {
 // Default fallback config
 const defaultConfig: AdminConfig = {
   company: {
-    name: "Classic Manda",
+    name: "Velvet supply",
     tagline: "Timeless Elegance, Modern Style",
     description: "Your premier destination for classic and contemporary fashion"
   },
   contact: {
-    email: "info@classicmanda.com",
+    email: "info@velvetsupply.com",
     phone: "+1 (205) 852-7810",
     address: {
       street: "624 Skyland Blvd E",
       city: "Tuscaloosa",
       state: "Alabama",
       zipCode: "35405",
-      country: "United States",
-      full: "624 Skyland Blvd E, Tuscaloosa, Alabama 35405, United States"
+      country: "United States"
     }
   },
   social: {
-    facebook: "https://facebook.com/classicmanda",
-    instagram: "https://instagram.com/classicmanda",
-    twitter: "https://twitter.com/classicmanda",
-    linkedin: "https://linkedin.com/company/classicmanda"
+    facebook: "https://facebook.com/velvetsupply",
+    instagram: "https://instagram.com/velvetsupply",
+    twitter: "https://twitter.com/velvetsupply",
+    linkedin: "https://linkedin.com/company/velvetsupply"
   },
   business: {
     hours: {
@@ -136,6 +134,21 @@ const defaultConfig: AdminConfig = {
 };
 
 let cachedConfig: AdminConfig | null = null;
+
+/**
+ * Utility function to compose full address from individual components
+ */
+export function getFullAddress(address: AdminConfig['contact']['address']): string {
+  const parts = [];
+  
+  if (address.street) parts.push(address.street);
+  if (address.city) parts.push(address.city);
+  if (address.state) parts.push(address.state);
+  if (address.zipCode) parts.push(address.zipCode);
+  if (address.country) parts.push(address.country);
+  
+  return parts.join(', ');
+}
 
 /**
  * Load admin configuration from JSON file

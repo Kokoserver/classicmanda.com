@@ -79,10 +79,10 @@
 
 <svelte:head>
 	{#if product}
-		<title>{product.name} - Classicmanda</title>
+		<title>{product.name} - Velvet supply</title>
 		<meta name="description" content={product.description} />
 	{:else}
-		<title>Product Details - Classicmanda</title>
+		<title>Product Details - Velvet supply</title>
 	{/if}
 </svelte:head>
 

@@ -2,7 +2,7 @@ import type { Cart } from '../types/cart.js';
 import type { Product } from '../types/product.js';
 
 export class CartService {
-	private storageKey = 'classicmanda_cart';
+	private storageKey = 'velvetsupply_cart';
 
 	getCart(): Cart {
 		if (typeof window === 'undefined') {

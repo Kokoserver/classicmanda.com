@@ -67,7 +67,7 @@
 				<h2 class="text-3xl font-bold">What Our Customers Say</h2>
 			</div>
 			<p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-				Don't just take our word for it. Here's what our satisfied customers have to say about their experience with Classicmanda.
+				Don't just take our word for it. Here's what our satisfied customers have to say about their experience with Velvet supply.
 			</p>
 		</div>
 
@@ -168,7 +168,7 @@
 
 		<div class="text-center mt-12">
 			<p class="text-muted-foreground mb-4">
-				Join thousands of satisfied customers who trust Classicmanda for their premium product needs.
+				Join thousands of satisfied customers who trust Velvet supply for their premium product needs.
 			</p>
 			<div class="flex items-center justify-center gap-8 text-sm text-muted-foreground">
 				<div class="flex items-center gap-2">
