@@ -23,7 +23,7 @@ export const testimonials: Testimonial[] = [
 	},
 	{
 		id: '2',
-		name: 'David Okafor',
+		name: 'David Martinez',
 		role: 'Restaurant Owner',
 		company: 'Golden Spoon Restaurant',
 		location: 'Austin, Texas',
@@ -34,7 +34,7 @@ export const testimonials: Testimonial[] = [
 	},
 	{
 		id: '3',
-		name: 'Amina Hassan',
+		name: 'Emily Chen',
 		role: 'Interior Designer',
 		company: 'Elegant Spaces Design',
 		location: 'Denver, Colorado',
@@ -45,7 +45,7 @@ export const testimonials: Testimonial[] = [
 	},
 	{
 		id: '4',
-		name: 'Michael Adebayo',
+		name: 'Michael Thompson',
 		role: 'Construction Manager',
 		company: 'BuildRight Construction',
 		location: 'Seattle, Washington',
@@ -56,7 +56,7 @@ export const testimonials: Testimonial[] = [
 	},
 	{
 		id: '5',
-		name: 'Grace Okwu',
+		name: 'Grace Williams',
 		role: 'Homeowner',
 		location: 'Atlanta, Georgia',
 		content: 'Amazing customer service and product quality. The team helped me choose the perfect products for my home renovation. Very satisfied with my purchase!',
@@ -65,7 +65,7 @@ export const testimonials: Testimonial[] = [
 	},
 	{
 		id: '6',
-		name: 'Ibrahim Musa',
+		name: 'James Rodriguez',
 		role: 'Electrician',
 		company: 'PowerTech Solutions',
 		location: 'Phoenix, Arizona',
