@@ -1,6 +1,14 @@
 <script lang="ts">
 	import Card from '$lib/components/ui/Card.svelte';
-	import { config } from '$lib/config/env.js';
+	import { loadAdminConfig } from '$lib/utils/adminConfig.js';
+
+	let siteConfig = $state<any>(null);
+
+	$effect(() => {
+		(async () => {
+			siteConfig = await loadAdminConfig();
+		})()
+	});
 </script>
 
 <svelte:head>
@@ -110,11 +118,13 @@
 				<p>
 					If you have any questions about this privacy policy or our data practices, please contact us:
 				</p>
-				<ul>
-					<li>Email: {config.contactEmail}</li>
-					<li>Phone: {config.contactPhone}</li>
-					<li>Address: {config.contactAddress}</li>
+				{#if siteConfig}
+					<ul>
+						<li>Email: {siteConfig.contact.email}</li>
+						<li>Phone: {siteConfig.contact.phone}</li>
+						<li>Address: {siteConfig.contact.address.full}</li>
 					</ul>
+				{/if}
 
 				<h2>Consent</h2>
 				<p>

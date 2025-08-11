@@ -7,8 +7,9 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
-	import { config } from '$lib/config/env.js';
-	import { Plus, Trash2, Upload, Lock, Truck, ChartColumn } from 'lucide-svelte';
+
+	import { Plus, Trash2, Upload, Lock, Truck, ChartColumn, Settings, Save, RefreshCw } from 'lucide-svelte';
+	import { loadAdminConfig, saveAdminConfig, type AdminConfig } from '$lib/utils/adminConfig.js';
 
 	// State using Svelte 5 runes
 	let isAuthenticated = $state(false);
@@ -46,6 +47,13 @@
 		lastReset: ''
 	});
 
+	// Admin configuration state
+	let adminConfig = $state<AdminConfig | null>(null);
+	let configLoading = $state(false);
+	let configSaving = $state(false);
+	let configMessage = $state('');
+	let activeConfigTab = $state<'contact' | 'company' | 'business' | 'features'>('contact');
+
 	// Computed values using Svelte 5 runes
 	let isSuccess = $derived(submitMessage.includes('success'));
 	let messageClasses = $derived(`mb-8 p-4 rounded-xl border-l-4 backdrop-blur-sm ${
@@ -64,15 +72,34 @@
 		
 		// Initialize shipping status
 		updateShippingInfo();
+		
+		// Load admin configuration
+		loadConfig();
 	});
 
-	function authenticate() {
-		if (password === config.adminPassword) {
-			isAuthenticated = true;
-			authError = '';
-			sessionStorage.setItem('admin-authenticated', 'true');
-		} else {
-			authError = 'Invalid password';
+	async function authenticate() {
+		try {
+			// Send password to secure server-side endpoint for validation
+			const response = await fetch('/api/admin/auth', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ password })
+			});
+
+			const result = await response.json();
+
+			if (result.success) {
+				isAuthenticated = true;
+				authError = '';
+				sessionStorage.setItem('admin-authenticated', 'true');
+			} else {
+				authError = result.message || 'Invalid password';
+			}
+		} catch (error) {
+			console.error('Authentication error:', error);
+			authError = 'Authentication failed. Please try again.';
 		}
 	}
 
@@ -184,6 +211,46 @@
 	function simulateOrder() {
 		shippingManager.addOrder();
 		updateShippingInfo();
+	}
+
+	// Admin configuration functions
+	async function loadConfig() {
+		configLoading = true;
+		try {
+			adminConfig = await loadAdminConfig();
+			console.log(adminConfig);
+			configMessage = '';
+		} catch (error) {
+			configMessage = 'Failed to load configuration';
+			console.error('Error loading config:', error);
+		} finally {
+			configLoading = false;
+		}
+	}
+
+	async function saveConfig() {
+		if (!adminConfig) return;
+		
+		configSaving = true;
+		try {
+			const success = await saveAdminConfig(adminConfig);
+			if (success) {
+				configMessage = 'Configuration saved successfully!';
+				// Also update the static JSON file for immediate effect
+				localStorage.setItem('admin-config', JSON.stringify(adminConfig));
+			} else {
+				configMessage = 'Failed to save configuration';
+			}
+		} catch (error) {
+			configMessage = 'Error saving configuration';
+			console.error('Error saving config:', error);
+		} finally {
+			configSaving = false;
+		}
+	}
+
+	function resetConfig() {
+		loadConfig();
 	}
 
 	const categoryOptions = [
@@ -569,6 +636,264 @@
 							</Button>
 						</div>
 					</div>
+				</Card>
+			</div>
+
+			<!-- Admin Configuration Management Section -->
+			<div class="max-w-5xl mx-auto mb-8">
+				<Card class="p-6 bg-white/80 backdrop-blur-sm border-0 shadow-xl rounded-2xl">
+					<div class="flex items-center justify-between mb-6">
+						<div class="flex items-center gap-3">
+							<div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+								<Settings class="h-5 w-5 text-white" />
+							</div>
+							<h2 class="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Site Configuration</h2>
+						</div>
+						<div class="flex gap-2">
+							<Button 
+								variant="outline" 
+								size="sm" 
+								class="border-purple-200 text-purple-600 hover:bg-purple-50"
+								onclick={resetConfig}
+								disabled={configLoading}
+							>
+								<RefreshCw class="h-4 w-4 mr-2" />
+								Reload
+							</Button>
+							<Button 
+								size="sm" 
+								class="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white"
+								onclick={saveConfig}
+								disabled={configSaving || !adminConfig}
+							>
+								<Save class="h-4 w-4 mr-2" />
+								{configSaving ? 'Saving...' : 'Save Changes'}
+							</Button>
+						</div>
+					</div>
+
+					{#if configMessage}
+						<div class="mb-6 p-4 rounded-xl border-l-4 backdrop-blur-sm {
+							configMessage.includes('success') ? 'bg-green-50/80 border-green-500 text-green-800' : 'bg-red-50/80 border-red-500 text-red-800'
+						}">
+							<p class="font-semibold">{configMessage}</p>
+						</div>
+					{/if}
+
+					{#if configLoading}
+						<div class="text-center py-8">
+							<div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+							<p class="mt-2 text-gray-600">Loading configuration...</p>
+						</div>
+					{:else if adminConfig}
+						<!-- Configuration Tabs -->
+						<div class="mb-6">
+							<div class="flex space-x-1 bg-gray-100 p-1 rounded-lg">
+								<button 
+									class="px-4 py-2 rounded-md text-sm font-medium transition-colors {
+										activeConfigTab === 'contact' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+									}"
+									onclick={() => activeConfigTab = 'contact'}
+								>
+									Contact Info
+								</button>
+								<button 
+									class="px-4 py-2 rounded-md text-sm font-medium transition-colors {
+										activeConfigTab === 'company' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+									}"
+									onclick={() => activeConfigTab = 'company'}
+								>
+									Company Info
+								</button>
+								<button 
+									class="px-4 py-2 rounded-md text-sm font-medium transition-colors {
+										activeConfigTab === 'business' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+									}"
+									onclick={() => activeConfigTab = 'business'}
+								>
+									Business Details
+								</button>
+								<button 
+									class="px-4 py-2 rounded-md text-sm font-medium transition-colors {
+										activeConfigTab === 'features' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-600 hover:text-gray-900'
+									}"
+									onclick={() => activeConfigTab = 'features'}
+								>
+									Features
+								</button>
+							</div>
+						</div>
+
+						<!-- Contact Info Tab -->
+						{#if activeConfigTab === 'contact'}
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div class="space-y-4">
+									<div>
+										<label for="email" class="block text-sm font-semibold mb-2 text-gray-700">Email Address</label>
+										<Input 
+											bind:value={adminConfig.contact.email}
+											placeholder="info@classicmanda.com"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+									<div>
+										<label for="phone" class="block text-sm font-semibold mb-2 text-gray-700">Phone Number</label>
+										<Input 
+											bind:value={adminConfig.contact.phone}
+											placeholder="+1 (205) 852-7810"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+								</div>
+								<div class="space-y-4">
+									<div>
+										<label for="street" class="block text-sm font-semibold mb-2 text-gray-700">Street Address</label>
+										<Input 
+											bind:value={adminConfig.contact.address.street}
+											placeholder="624 Skyland Blvd E"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+									<div class="grid grid-cols-2 gap-4">
+										<div>
+											<label for="city" class="block text-sm font-semibold mb-2 text-gray-700">City</label>
+											<Input 
+												bind:value={adminConfig.contact.address.city}
+												placeholder="Tuscaloosa"
+												class="h-12 border-2 border-purple-200 focus:border-purple-500"
+											/>
+										</div>
+										<div>
+											<label for="state" class="block text-sm font-semibold mb-2 text-gray-700">State</label>
+											<Input 
+												bind:value={adminConfig.contact.address.state}
+												placeholder="Alabama"
+												class="h-12 border-2 border-purple-200 focus:border-purple-500"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+						{/if}
+
+						<!-- Company Info Tab -->
+						{#if activeConfigTab === 'company'}
+							<div class="space-y-6">
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+									<div>
+										<label for="companyName" class="block text-sm font-semibold mb-2 text-gray-700">Company Name</label>
+										<Input 
+											bind:value={adminConfig.company.name}
+											placeholder="Classic Manda"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+									<div>
+										<label for="tagline" class="block text-sm font-semibold mb-2 text-gray-700">Tagline</label>
+										<Input 
+											bind:value={adminConfig.company.tagline}
+											placeholder="Timeless Elegance, Modern Style"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+								</div>
+								<div>
+									<label for="description" class="block text-sm font-semibold mb-2 text-gray-700">Description</label>
+									<textarea 
+										bind:value={adminConfig.company.description}
+										placeholder="Your premier destination for classic and contemporary fashion"
+										class="w-full h-24 px-3 py-2 border-2 border-purple-200 rounded-md focus:border-purple-500 focus:outline-none resize-none"
+									></textarea>
+								</div>
+							</div>
+						{/if}
+
+						<!-- Business Details Tab -->
+						{#if activeConfigTab === 'business'}
+							<div class="space-y-6">
+								<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+									<div>
+										<label for="established" class="block text-sm font-semibold mb-2 text-gray-700">Established Year</label>
+										<Input 
+											bind:value={adminConfig.business.established}
+											placeholder="2020"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+									<div>
+										<label for="taxId" class="block text-sm font-semibold mb-2 text-gray-700">Tax ID</label>
+										<Input 
+											bind:value={adminConfig.business.taxId}
+											placeholder="XX-XXXXXXX"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+									<div>
+										<label for="license" class="block text-sm font-semibold mb-2 text-gray-700">License</label>
+										<Input 
+											bind:value={adminConfig.business.license}
+											placeholder="AL-RETAIL-2020-001"
+											class="h-12 border-2 border-purple-200 focus:border-purple-500"
+										/>
+									</div>
+								</div>
+							</div>
+						{/if}
+
+						<!-- Features Tab -->
+						{#if activeConfigTab === 'features'}
+							<div class="space-y-6">
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+									<div class="space-y-4">
+										<h3 class="text-lg font-semibold text-gray-800">Site Features</h3>
+										<label class="flex items-center space-x-3 p-3 bg-white/60 rounded-xl border border-purple-200 hover:bg-white/80 transition-colors cursor-pointer">
+											<input
+												type="checkbox"
+												bind:checked={adminConfig.features.enableLiveChat}
+												class="w-5 h-5 text-purple-600 border-2 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
+											/>
+											<span class="font-medium text-gray-700">Enable Live Chat</span>
+										</label>
+										<label class="flex items-center space-x-3 p-3 bg-white/60 rounded-xl border border-purple-200 hover:bg-white/80 transition-colors cursor-pointer">
+											<input
+												type="checkbox"
+												bind:checked={adminConfig.features.enableNewsletterSignup}
+												class="w-5 h-5 text-purple-600 border-2 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
+											/>
+											<span class="font-medium text-gray-700">Newsletter Signup</span>
+										</label>
+										<label class="flex items-center space-x-3 p-3 bg-white/60 rounded-xl border border-purple-200 hover:bg-white/80 transition-colors cursor-pointer">
+											<input
+												type="checkbox"
+												bind:checked={adminConfig.features.enableProductReviews}
+												class="w-5 h-5 text-purple-600 border-2 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
+											/>
+											<span class="font-medium text-gray-700">Product Reviews</span>
+										</label>
+									</div>
+									<div class="space-y-4">
+										<h3 class="text-lg font-semibold text-gray-800">Shopping Features</h3>
+										<label class="flex items-center space-x-3 p-3 bg-white/60 rounded-xl border border-purple-200 hover:bg-white/80 transition-colors cursor-pointer">
+											<input
+												type="checkbox"
+												bind:checked={adminConfig.features.enableWishlist}
+												class="w-5 h-5 text-purple-600 border-2 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
+											/>
+											<span class="font-medium text-gray-700">Wishlist</span>
+										</label>
+										<label class="flex items-center space-x-3 p-3 bg-white/60 rounded-xl border border-purple-200 hover:bg-white/80 transition-colors cursor-pointer">
+											<input
+												type="checkbox"
+												bind:checked={adminConfig.features.enableCompareProducts}
+												class="w-5 h-5 text-purple-600 border-2 border-purple-300 rounded focus:ring-purple-500 focus:ring-2"
+											/>
+											<span class="font-medium text-gray-700">Compare Products</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						{/if}
+					{/if}
 				</Card>
 			</div>
 		{/if}

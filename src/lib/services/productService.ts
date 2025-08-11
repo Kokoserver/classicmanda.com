@@ -1,12 +1,13 @@
 import type { Product, ProductFilter } from '../types/product.js';
 import { ProductCategory } from '../types/product.js';
 import { apiClient } from '../api/client.js';
-import { config } from '../config/env.js';
+// Use mock data for development
+const useMockData = true;
 import { mockProducts } from '../data/mockProducts.js';
 
 export class ProductService {
 	async getProducts(filter?: ProductFilter): Promise<Product[]> {
-		if (config.useMockData) {
+		if (useMockData) {
 			return this.filterMockProducts(filter);
 		}
 
@@ -22,7 +23,7 @@ export class ProductService {
 	}
 
 	async getProduct(id: string): Promise<Product | null> {
-		if (config.useMockData) {
+		if (useMockData) {
 			return mockProducts.find((p) => p.id === id) || null;
 		}
 

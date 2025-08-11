@@ -1,9 +1,8 @@
 import type { Cart } from '../types/cart.js';
 import type { Product } from '../types/product.js';
-import { config } from '../config/env.js';
 
 export class CartService {
-	private storageKey = config.cartStorageKey;
+	private storageKey = 'classicmanda_cart';
 
 	getCart(): Cart {
 		if (typeof window === 'undefined') {

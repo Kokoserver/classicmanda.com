@@ -6,8 +6,16 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
-	import { config } from '$lib/config/env.js';
+	import { loadAdminConfig } from '$lib/utils/adminConfig.js';
 	import { Mail, Phone, MapPin, Send, CircleCheckBig } from 'lucide-svelte';
+
+	let siteConfig = $state<any>(null);
+
+	$effect(() => {
+		(async () => {
+			siteConfig = await loadAdminConfig();
+		})()
+	});
 
 	let contactData: ContactForm = $state({
 		firstName: '',
@@ -113,31 +121,33 @@
 				<Card class="p-6">
 					<h2 class="text-xl font-semibold mb-4">Get in Touch</h2>
 					<div class="space-y-4">
-						<div class="flex items-start gap-3">
-							<Mail class="h-5 w-5 text-primary mt-1" />
-							<div>
-								<p class="font-medium">Email</p>
-								<p class="text-muted-foreground">{config.contactEmail}</p>
+						{#if siteConfig}
+							<div class="flex items-start gap-3">
+								<Mail class="h-5 w-5 text-primary mt-1" />
+								<div>
+									<p class="font-medium">Email</p>
+									<p class="text-muted-foreground">{siteConfig.contact.email}</p>
+								</div>
 							</div>
-						</div>
 
-						<div class="flex items-start gap-3">
-							<Phone class="h-5 w-5 text-primary mt-1" />
-							<div>
-								<p class="font-medium">Phone</p>
-								<p class="text-muted-foreground">{config.contactPhone}</p>
+							<div class="flex items-start gap-3">
+								<Phone class="h-5 w-5 text-primary mt-1" />
+								<div>
+									<p class="font-medium">Phone</p>
+									<p class="text-muted-foreground">{siteConfig.contact.phone}</p>
+								</div>
 							</div>
-						</div>
 
-						<div class="flex items-start gap-3">
-							<MapPin class="h-5 w-5 text-primary mt-1" />
-							<div>
-								<p class="font-medium">Address</p>
-								<p class="text-muted-foreground">
-									{config.contactAddress}
-								</p>
+							<div class="flex items-start gap-3">
+								<MapPin class="h-5 w-5 text-primary mt-1" />
+								<div>
+									<p class="font-medium">Address</p>
+									<p class="text-muted-foreground">
+										{siteConfig.contact.address.full}
+									</p>
+								</div>
 							</div>
-						</div>
+						{/if}
 					</div>
 				</Card>
 

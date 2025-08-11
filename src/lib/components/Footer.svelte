@@ -1,6 +1,14 @@
 <script lang="ts">
-	import { config } from '$lib/config/env.js';
+	import { loadAdminConfig } from '$lib/utils/adminConfig.js';
 	import { Mail, Phone, MapPin } from 'lucide-svelte';
+
+	let siteConfig = $state<any>(null);
+
+	$effect(() => {
+		(async () => {
+			siteConfig = await loadAdminConfig();
+		})()
+	});
 </script>
 
 <footer class="bg-muted/50 border-t">
@@ -8,24 +16,26 @@
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 			<!-- Company Info -->
 			<div class="space-y-4">
-				<img src="/logo.svg" alt="Classicmanda" class="h-12 w-auto" />
+				<img src="/logo.svg" alt={siteConfig?.companyName || 'Classicmanda'} class="h-12 w-auto" />
 				<p class="text-sm text-muted-foreground">
-					{config.appDescription}
+					{siteConfig?.companyDescription || 'Premium products for your home and business'}
 				</p>
-				<div class="space-y-2">
-					<div class="flex items-center space-x-2 text-sm">
-						<Mail class="h-4 w-4" />
-						<span>{config.contactEmail}</span>
+				{#if siteConfig}
+					<div class="space-y-2">
+						<div class="flex items-center space-x-2 text-sm">
+							<Mail class="h-4 w-4" />
+							<span>{siteConfig.contact.email}</span>
+						</div>
+						<div class="flex items-center space-x-2 text-sm">
+							<Phone class="h-4 w-4" />
+							<span>{siteConfig.contact.phone}</span>
+						</div>
+						<div class="flex items-start space-x-2 text-sm">
+							<MapPin class="h-6 w-6 mt-0.5" />
+							<span>{siteConfig.contact.address.full}</span>
+						</div>
 					</div>
-					<div class="flex items-center space-x-2 text-sm">
-						<Phone class="h-4 w-4" />
-						<span>{config.contactPhone}</span>
-					</div>
-					<div class="flex items-start space-x-2 text-sm">
-						<MapPin class="h-6 w-6 mt-0.5" />
-						<span>{config.contactAddress}</span>
-					</div>
-				</div>
+				{/if}
 			</div>
 
 			<!-- Quick Links -->

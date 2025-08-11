@@ -1,5 +1,3 @@
-import { config } from '../config/env.js';
-
 export interface ApiResponse<T> {
 	data: T;
 	success: boolean;
@@ -12,7 +10,8 @@ export class ApiClient {
 	private defaultHeaders: Record<string, string> = {};
 
 	constructor() {
-		this.baseUrl = config.apiUrl;
+		// Default to local API endpoint
+		this.baseUrl = '/api';
 	}
 
 	private async request<T>(url: string, options: RequestInit = {}): Promise<ApiResponse<T>> {

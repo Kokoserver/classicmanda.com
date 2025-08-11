@@ -7,7 +7,7 @@
 	let currentSlide = $state(0);
 	let autoPlay = $state(true);
 	let autoPlayInterval = $state(8000);
-	let intervalId = $state<number | null>(null);
+	let intervalId = $state<NodeJS.Timeout | null>(null);
 	let isHovered = $state(false);
 
 	const nextSlide = () => {
@@ -61,11 +61,16 @@
 	onmouseleave={() => isHovered = false}
 	role="banner"
 >
-	{#each heroSlides as slide, index}
-		<div 
-			class="absolute inset-0 transition-all duration-1000 ease-in-out {index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}"
-			style="background-image: url('{slide.backgroundImage}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
-		>
+	<!-- Carousel container with transform-based sliding -->
+	<div 
+		class="flex transition-transform duration-1000 ease-in-out h-full"
+		style="transform: translateX(-{currentSlide * 100}%);"
+	>
+		{#each heroSlides as slide, index}
+			<div 
+				class="w-full h-full flex-shrink-0 relative min-w-full"
+				style="background-image: url('{slide.backgroundImage}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+			>
 			<!-- Enhanced Multi-layer Overlay -->
 			<div class="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/50"></div>
 			<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
@@ -83,7 +88,7 @@
 				<div class="container mx-auto px-6 md:px-8 text-center">
 					<div class="max-w-5xl mx-auto">
 						<!-- Animated title with stagger effect -->
-						<div class="mb-6 {index === currentSlide ? 'animate-bounce-in' : 'opacity-0'}" style="animation-delay: 0.2s;">
+						<div class="mb-6 {index === currentSlide ? 'animate-bounce-in' : 'opacity-50'}" style="animation-delay: 0.2s;">
 							<h1 class="text-4xl md:text-6xl lg:text-8xl font-black mb-2 {slide.textColor === 'light' ? 'text-white' : 'text-gray-900'} drop-shadow-2xl leading-tight tracking-tight">
 								<span class="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
 									{slide.title}
@@ -91,20 +96,20 @@
 							</h1>
 						</div>
 						
-						<div class="mb-8 {index === currentSlide ? 'animate-pulse' : 'opacity-0'}" style="animation-delay: 0.4s;">
+						<div class="mb-8 {index === currentSlide ? 'animate-pulse' : 'opacity-50'}" style="animation-delay: 0.4s;">
 							<h2 class="text-xl md:text-3xl lg:text-4xl font-bold mb-4 {slide.textColor === 'light' ? 'text-white/95' : 'text-gray-700'} drop-shadow-lg">
 								{slide.subtitle}
 							</h2>
 							<div class="w-24 h-1 bg-gradient-to-r from-primary to-blue-500 mx-auto rounded-full"></div>
 						</div>
 						
-						<div class="mb-10 {index === currentSlide ? 'animate-pulse' : 'opacity-0'}" style="animation-delay: 0.6s;">
+						<div class="mb-10 {index === currentSlide ? 'animate-pulse' : 'opacity-50'}" style="animation-delay: 0.6s;">
 							<p class="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto {slide.textColor === 'light' ? 'text-white/85' : 'text-gray-600'} drop-shadow-md leading-relaxed">
 								{slide.description}
 							</p>
 						</div>
 						
-						<div class="{index === currentSlide ? 'animate-bounce' : 'opacity-0'}" style="animation-delay: 0.8s;">
+						<div class="{index === currentSlide ? 'animate-bounce' : 'opacity-50'}" style="animation-delay: 0.8s;">
 							<Button
 								size="lg"
 								class="text-lg md:text-xl px-10 py-5 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700 text-white shadow-2xl hover:shadow-primary/25 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 rounded-full font-bold border-2 border-white/20 backdrop-blur-sm"
@@ -123,8 +128,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	{/each}
+			</div>
+		{/each}
+	</div>
 
 	<!-- Enhanced Navigation Arrows -->
 	<button

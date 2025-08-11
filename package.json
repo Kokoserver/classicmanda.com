@@ -25,6 +25,7 @@
 		"@sveltejs/vite-plugin-svelte": "^6.0.0",
 		"@tailwindcss/forms": "^0.5.7",
 		"@tailwindcss/typography": "^0.5.10",
+		"@types/node": "^24.2.1",
 		"@vitest/browser": "^3.2.3",
 		"autoprefixer": "^10.4.21",
 		"eslint": "^9.18.0",
@@ -48,6 +49,7 @@
 	"dependencies": {
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
+		"fs": "^0.0.1-security",
 		"lucide-svelte": "^0.539.0",
 		"tailwind-merge": "^3.3.1"
 	}

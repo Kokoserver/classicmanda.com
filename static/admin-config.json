@@ -1,0 +1,70 @@
+{
+  "company": {
+    "name": "Classic Manda",
+    "tagline": "Timeless Elegance, Modern Style",
+    "description": "Your premier destination for classic and contemporary fashion"
+  },
+  "contact": {
+    "email": "info@classicmanda.com",
+    "phone": "+1 (704) 389-5624",
+    "address": {
+      "street": "1847 Maple Ridge Drive",
+      "city": "Charlotte",
+      "state": "North Carolina",
+      "zipCode": "28269",
+      "country": "United States",
+      "full": "1847 Maple Ridge Drive, Charlotte, North Carolina 28269, United States"
+    }
+  },
+  "social": {
+    "facebook": "https://facebook.com/classicmanda",
+    "instagram": "https://instagram.com/classicmanda",
+    "twitter": "https://twitter.com/classicmanda",
+    "linkedin": "https://linkedin.com/company/classicmanda"
+  },
+  "business": {
+    "hours": {
+      "monday": "9:00 AM - 8:00 PM",
+      "tuesday": "9:00 AM - 8:00 PM",
+      "wednesday": "9:00 AM - 8:00 PM",
+      "thursday": "9:00 AM - 8:00 PM",
+      "friday": "9:00 AM - 9:00 PM",
+      "saturday": "10:00 AM - 9:00 PM",
+      "sunday": "12:00 PM - 6:00 PM"
+    },
+    "established": "2020",
+    "taxId": "XX-XXXXXXX",
+    "license": "AL-RETAIL-2020-001"
+  },
+  "shipping": {
+    "freeShippingThreshold": 75,
+    "standardShippingCost": 8.99,
+    "expeditedShippingCost": 15.99,
+    "internationalShippingCost": 25.99
+  },
+  "policies": {
+    "returnPeriod": 30,
+    "warrantyPeriod": 365,
+    "privacyPolicyLastUpdated": "2024-01-15",
+    "termsOfServiceLastUpdated": "2024-01-15"
+  },
+  "seo": {
+    "metaTitle": "Classic Manda - Timeless Fashion & Style",
+    "metaDescription": "Discover timeless elegance and modern style at Classic Manda. Shop our curated collection of premium fashion, accessories, and lifestyle products.",
+    "keywords": "fashion, style, clothing, accessories, premium, classic, modern, elegant"
+  },
+  "features": {
+    "enableLiveChat": true,
+    "enableNewsletterSignup": true,
+    "enableProductReviews": true,
+    "enableWishlist": true,
+    "enableCompareProducts": false
+  },
+  "maintenance": {
+    "isMaintenanceMode": false,
+    "maintenanceMessage": "We're currently updating our systems to serve you better. Please check back soon!",
+    "estimatedDowntime": "2 hours"
+  },
+  "lastUpdated": "2025-08-11T00:16:40.494Z",
+  "version": "1.0.0"
+}

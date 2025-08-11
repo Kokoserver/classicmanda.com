@@ -1,7 +1,9 @@
 import type { Order, OrderStatus, ContactForm } from '../types/order.js';
 import type { Cart, CheckoutData } from '../types/cart.js';
 import { apiClient } from '../api/client.js';
-import { config } from '../config/env.js';
+
+// Use mock data for development
+const useMockData = true;
 
 export class OrderService {
 	async createOrder(cart: Cart, customerInfo: CheckoutData): Promise<Order> {
@@ -15,7 +17,7 @@ export class OrderService {
 			updatedAt: new Date().toISOString()
 		};
 
-		if (config.useMockData) {
+		if (useMockData) {
 			return order;
 		}
 
@@ -31,7 +33,7 @@ export class OrderService {
 	}
 
 	async submitContactForm(contactData: ContactForm): Promise<boolean> {
-		if (config.useMockData) {
+		if (useMockData) {
 			return true;
 		}
 
