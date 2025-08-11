@@ -6,15 +6,15 @@
 	import Button from '$lib/components/ui/Button.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
-	import { loadAdminConfig } from '$lib/utils/adminConfig.js';
+	import { adminConfigStore } from '$lib/stores/adminConfig.js';
 	import { Mail, Phone, MapPin, Send, CircleCheckBig } from 'lucide-svelte';
 
 	let siteConfig = $state<any>(null);
 
 	$effect(() => {
-		(async () => {
-			siteConfig = await loadAdminConfig();
-		})()
+		return adminConfigStore.subscribe(config => {
+			siteConfig = config;
+		});
 	});
 
 	let contactData: ContactForm = $state({

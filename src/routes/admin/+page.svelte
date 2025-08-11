@@ -10,6 +10,7 @@
 
 	import { Plus, Trash2, Upload, Lock, Truck, ChartColumn, Settings, Save, RefreshCw } from 'lucide-svelte';
 	import { loadAdminConfig, saveAdminConfig, type AdminConfig } from '$lib/utils/adminConfig.js';
+	import { refreshAdminConfig } from '$lib/stores/adminConfig.js';
 
 	// State using Svelte 5 runes
 	let isAuthenticated = $state(false);
@@ -236,6 +237,8 @@
 			const success = await saveAdminConfig(adminConfig);
 			if (success) {
 				configMessage = 'Configuration saved successfully!';
+				// Refresh the admin config store to update all pages
+				await refreshAdminConfig();
 				// Also update the static JSON file for immediate effect
 				localStorage.setItem('admin-config', JSON.stringify(adminConfig));
 			} else {

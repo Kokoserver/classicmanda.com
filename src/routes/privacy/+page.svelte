@@ -1,13 +1,13 @@
 <script lang="ts">
 	import Card from '$lib/components/ui/Card.svelte';
-	import { loadAdminConfig } from '$lib/utils/adminConfig.js';
+	import { adminConfigStore } from '$lib/stores/adminConfig.js';
 
 	let siteConfig = $state<any>(null);
 
 	$effect(() => {
-		(async () => {
-			siteConfig = await loadAdminConfig();
-		})()
+		return adminConfigStore.subscribe(config => {
+			siteConfig = config;
+		});
 	});
 </script>
 

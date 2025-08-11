@@ -140,8 +140,8 @@ let cachedConfig: AdminConfig | null = null;
 /**
  * Load admin configuration from JSON file
  */
-export async function loadAdminConfig(): Promise<AdminConfig> {
-  if (cachedConfig) {
+export async function loadAdminConfig(forceReload: boolean = false): Promise<AdminConfig> {
+  if (cachedConfig && !forceReload) {
     return cachedConfig;
   }
 
@@ -183,7 +183,8 @@ export async function saveAdminConfig(config: AdminConfig): Promise<boolean> {
       });
       
       if (response.ok) {
-        cachedConfig = { ...config };
+        // Clear cache to force reload of fresh config
+        clearConfigCache();
         return true;
       }
       return false;

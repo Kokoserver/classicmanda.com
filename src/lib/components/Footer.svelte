@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { loadAdminConfig } from '$lib/utils/adminConfig.js';
+	import { adminConfigStore } from '$lib/stores/adminConfig.js';
 	import { Mail, Phone, MapPin } from 'lucide-svelte';
 
+	// Use reactive store for admin config
 	let siteConfig = $state<any>(null);
 
 	$effect(() => {
-		(async () => {
-			siteConfig = await loadAdminConfig();
-		})()
+		return adminConfigStore.subscribe(config => {
+			siteConfig = config;
+		});
 	});
 </script>
 

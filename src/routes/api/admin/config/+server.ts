@@ -1,10 +1,13 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { AdminConfig } from '$lib/utils/adminConfig';
-import { dev } from '$app/environment';
-import { getAdminConfig, setAdminConfig } from '$lib/server/adminConfig';
+import defaultConfigData from '$lib/assets/default-admin-config.json';
 
-const CONFIG_FILE_PATH = './src/lib/assets/admin-config.json';
+// Use static directory so SvelteKit won't overwrite it
+const CONFIG_FILE_PATH = './static/admin-config.json';
+
+// In-memory fallback for when file operations fail
+let memoryConfig: AdminConfig | null = null;
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
@@ -21,20 +24,25 @@ export const POST: RequestHandler = async ({ request }) => {
     // Add timestamp
     config.lastUpdated = new Date().toISOString();
     
-    // Store in memory (always works)
-    setAdminConfig(config);
+    // Always store in memory as fallback
+    memoryConfig = config;
     
-    // Try to write to file only in development
-    if (dev) {
+    // Try to write to file (works in most environments)
+    try {
+      const fs = await import('fs/promises');
+      
+      // Check if static directory exists, create if not
       try {
-        const fs = await import('fs/promises');
-        await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(config, null, 2), 'utf-8');
-        console.log('Admin config written to file (dev mode)');
-      } catch (fileError) {
-        console.warn('Could not write to file in dev mode:', fileError);
+        await fs.access('./static');
+      } catch {
+        await fs.mkdir('./static', { recursive: true });
       }
-    } else {
-      console.log('Admin config stored in memory (production mode)');
+      
+      // Write config to static directory
+      await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(config, null, 2), 'utf-8');
+      console.log('Admin config written to file successfully');
+    } catch (fileError) {
+      console.warn('Could not write to file, using memory storage:', fileError);
     }
     
     return json({ 
@@ -55,26 +63,27 @@ export const POST: RequestHandler = async ({ request }) => {
 
 export const GET: RequestHandler = async () => {
   try {
-    // Get current config (runtime or default)
-    const currentConfig = getAdminConfig();
-    
-    // In development, try to load from file if no runtime config exists
-    if (dev) {
-      try {
-        const fs = await import('fs/promises');
-        const configData = await fs.readFile(CONFIG_FILE_PATH, 'utf-8');
-        const fileConfig = JSON.parse(configData);
-        // Update runtime config with file data
-        setAdminConfig(fileConfig);
-        return json(fileConfig);
-      } catch (readError) {
-        // File doesn't exist or can't be read, use current config
-        return json(currentConfig);
-      }
-    } else {
-      // In production, return current config (runtime or default)
-      return json(currentConfig);
+    // Try to read from file first
+    try {
+      const fs = await import('fs/promises');
+      const configData = await fs.readFile(CONFIG_FILE_PATH, 'utf-8');
+      const fileConfig = JSON.parse(configData);
+      // Update memory config with file data
+      memoryConfig = fileConfig;
+      return json(fileConfig);
+    } catch (readError) {
+      // File doesn't exist or can't be read
+      console.log('Config file not found, checking memory and defaults');
     }
+    
+    // If file read failed, check memory config
+    if (memoryConfig) {
+      return json(memoryConfig);
+    }
+    
+    // Final fallback to default config
+    return json(defaultConfigData as AdminConfig);
+    
   } catch (error) {
     console.error('Error loading admin config:', error);
     return json(
