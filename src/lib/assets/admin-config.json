@@ -6,14 +6,14 @@
   },
   "contact": {
     "email": "info@classicmanda.com",
-    "phone": "+1 (704) 389-5624",
+    "phone": "+1 (205) 852-7810",
     "address": {
-      "street": "1847 Maple Ridge Drive",
-      "city": "Charlotte",
-      "state": "North Carolina",
-      "zipCode": "28269",
+      "street": "624 Skyland Blvd E",
+      "city": "Tuscaloosa",
+      "state": "Alabama",
+      "zipCode": "35405",
       "country": "United States",
-      "full": "1847 Maple Ridge Drive, Charlotte, North Carolina 28269, United States"
+      "full": "624 Skyland Blvd E, Tuscaloosa, Alabama 35405, United States"
     }
   },
   "social": {
@@ -34,37 +34,37 @@
     },
     "established": "2020",
     "taxId": "XX-XXXXXXX",
-    "license": "AL-RETAIL-2020-001"
+    "license": "BL-2020-001"
   },
   "shipping": {
-    "freeShippingThreshold": 75,
-    "standardShippingCost": 8.99,
-    "expeditedShippingCost": 15.99,
-    "internationalShippingCost": 25.99
+    "freeShippingThreshold": 50,
+    "standardShippingCost": 9.99,
+    "expeditedShippingCost": 19.99,
+    "internationalShippingCost": 29.99
   },
   "policies": {
     "returnPeriod": 30,
     "warrantyPeriod": 365,
-    "privacyPolicyLastUpdated": "2024-01-15",
-    "termsOfServiceLastUpdated": "2024-01-15"
+    "privacyPolicyLastUpdated": "2024-01-01",
+    "termsOfServiceLastUpdated": "2024-01-01"
   },
   "seo": {
-    "metaTitle": "Classic Manda - Timeless Fashion & Style",
-    "metaDescription": "Discover timeless elegance and modern style at Classic Manda. Shop our curated collection of premium fashion, accessories, and lifestyle products.",
-    "keywords": "fashion, style, clothing, accessories, premium, classic, modern, elegant"
+    "metaTitle": "Classic Manda - Timeless Elegance, Modern Style",
+    "metaDescription": "Discover timeless elegance with Classic Manda. Shop our curated collection of classic and contemporary fashion pieces.",
+    "keywords": "fashion, classic, contemporary, elegance, style, clothing"
   },
   "features": {
-    "enableLiveChat": true,
+    "enableLiveChat": false,
     "enableNewsletterSignup": true,
     "enableProductReviews": true,
-    "enableWishlist": true,
+    "enableWishlist": false,
     "enableCompareProducts": false
   },
   "maintenance": {
     "isMaintenanceMode": false,
-    "maintenanceMessage": "We're currently updating our systems to serve you better. Please check back soon!",
+    "maintenanceMessage": "We're currently performing scheduled maintenance. Please check back soon!",
     "estimatedDowntime": "2 hours"
   },
-  "lastUpdated": "2025-08-11T00:16:40.494Z",
+  "lastUpdated": "2025-08-11T00:44:22.171Z",
   "version": "1.0.0"
 }

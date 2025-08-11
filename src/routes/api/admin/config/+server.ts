@@ -2,10 +2,7 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { AdminConfig } from '$lib/utils/adminConfig';
 import { dev } from '$app/environment';
-import defaultConfigData from '$lib/assets/default-admin-config.json';
-
-// In-memory storage for production environments
-let runtimeConfig: AdminConfig | null = null;
+import { getAdminConfig, setAdminConfig } from '$lib/server/adminConfig';
 
 const CONFIG_FILE_PATH = './src/lib/assets/admin-config.json';
 
@@ -24,15 +21,20 @@ export const POST: RequestHandler = async ({ request }) => {
     // Add timestamp
     config.lastUpdated = new Date().toISOString();
     
-    // Always try to write to file first, fallback to memory storage
-    try {
-      const fs = await import('fs/promises');
-      await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(config, null, 2), 'utf-8');
-      console.log('Admin config successfully written to file');
-    } catch (fileError) {
-      console.warn('Could not write to file, using memory storage:', fileError);
-      // Fallback to memory storage
-      runtimeConfig = config;
+    // Store in memory (always works)
+    setAdminConfig(config);
+    
+    // Try to write to file only in development
+    if (dev) {
+      try {
+        const fs = await import('fs/promises');
+        await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(config, null, 2), 'utf-8');
+        console.log('Admin config written to file (dev mode)');
+      } catch (fileError) {
+        console.warn('Could not write to file in dev mode:', fileError);
+      }
+    } else {
+      console.log('Admin config stored in memory (production mode)');
     }
     
     return json({ 
@@ -53,25 +55,25 @@ export const POST: RequestHandler = async ({ request }) => {
 
 export const GET: RequestHandler = async () => {
   try {
-    // Check if we have runtime config (from previous POST or production)
-    if (runtimeConfig) {
-      return json(runtimeConfig);
-    }
+    // Get current config (runtime or default)
+    const currentConfig = getAdminConfig();
     
+    // In development, try to load from file if no runtime config exists
     if (dev) {
-      // In development, try to read from file first
       try {
         const fs = await import('fs/promises');
         const configData = await fs.readFile(CONFIG_FILE_PATH, 'utf-8');
-        const config = JSON.parse(configData);
-        return json(config);
+        const fileConfig = JSON.parse(configData);
+        // Update runtime config with file data
+        setAdminConfig(fileConfig);
+        return json(fileConfig);
       } catch (readError) {
-        // File doesn't exist, use default
-        return json(defaultConfigData);
+        // File doesn't exist or can't be read, use current config
+        return json(currentConfig);
       }
     } else {
-      // In production, use default config if no runtime config exists
-      return json(defaultConfigData);
+      // In production, return current config (runtime or default)
+      return json(currentConfig);
     }
   } catch (error) {
     console.error('Error loading admin config:', error);
