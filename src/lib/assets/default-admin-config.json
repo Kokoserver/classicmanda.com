@@ -1,0 +1,70 @@
+{
+  "company": {
+    "name": "Classic Manda",
+    "tagline": "Timeless Elegance, Modern Style",
+    "description": "Your premier destination for classic and contemporary fashion"
+  },
+  "contact": {
+    "email": "info@classicmanda.com",
+    "phone": "+1 (704) 389-5624",
+    "address": {
+      "street": "1847 Maple Ridge Drive",
+      "city": "Charlotte",
+      "state": "North Carolina",
+      "zipCode": "28269",
+      "country": "United States",
+      "full": "1847 Maple Ridge Drive, Charlotte, North Carolina 28269, United States"
+    }
+  },
+  "social": {
+    "facebook": "https://facebook.com/classicmanda",
+    "instagram": "https://instagram.com/classicmanda",
+    "twitter": "https://twitter.com/classicmanda",
+    "linkedin": "https://linkedin.com/company/classicmanda"
+  },
+  "business": {
+    "hours": {
+      "monday": "9:00 AM - 8:00 PM",
+      "tuesday": "9:00 AM - 8:00 PM",
+      "wednesday": "9:00 AM - 8:00 PM",
+      "thursday": "9:00 AM - 8:00 PM",
+      "friday": "9:00 AM - 9:00 PM",
+      "saturday": "10:00 AM - 9:00 PM",
+      "sunday": "12:00 PM - 6:00 PM"
+    },
+    "established": "2020",
+    "taxId": "XX-XXXXXXX",
+    "license": "BL-2020-001"
+  },
+  "shipping": {
+    "freeShippingThreshold": 50,
+    "standardShippingCost": 9.99,
+    "expeditedShippingCost": 19.99,
+    "internationalShippingCost": 29.99
+  },
+  "policies": {
+    "returnPeriod": 30,
+    "warrantyPeriod": 365,
+    "privacyPolicyLastUpdated": "2024-01-01",
+    "termsOfServiceLastUpdated": "2024-01-01"
+  },
+  "seo": {
+    "metaTitle": "Classic Manda - Timeless Elegance, Modern Style",
+    "metaDescription": "Discover timeless elegance with Classic Manda. Shop our curated collection of classic and contemporary fashion pieces.",
+    "keywords": "fashion, classic, contemporary, elegance, style, clothing"
+  },
+  "features": {
+    "enableLiveChat": false,
+    "enableNewsletterSignup": true,
+    "enableProductReviews": true,
+    "enableWishlist": false,
+    "enableCompareProducts": false
+  },
+  "maintenance": {
+    "isMaintenanceMode": false,
+    "maintenanceMessage": "We're currently performing scheduled maintenance. Please check back soon!",
+    "estimatedDowntime": "2 hours"
+  },
+  "lastUpdated": "2024-01-01T00:00:00.000Z",
+  "version": "1.0.0"
+}

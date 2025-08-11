@@ -1,8 +1,13 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { AdminConfig } from '$lib/utils/adminConfig';
+import { dev } from '$app/environment';
+import defaultConfigData from '$lib/assets/default-admin-config.json';
 
-const CONFIG_FILE_PATH = './static/admin-config.json';
+// In-memory storage for production environments
+let runtimeConfig: AdminConfig | null = null;
+
+const CONFIG_FILE_PATH = './src/lib/assets/admin-config.json';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
@@ -19,9 +24,16 @@ export const POST: RequestHandler = async ({ request }) => {
     // Add timestamp
     config.lastUpdated = new Date().toISOString();
     
-    // Write the config to the JSON file
-    const fs = await import('fs/promises');
-    await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(config, null, 2), 'utf-8');
+    // Always try to write to file first, fallback to memory storage
+    try {
+      const fs = await import('fs/promises');
+      await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(config, null, 2), 'utf-8');
+      console.log('Admin config successfully written to file');
+    } catch (fileError) {
+      console.warn('Could not write to file, using memory storage:', fileError);
+      // Fallback to memory storage
+      runtimeConfig = config;
+    }
     
     return json({ 
       success: true, 
@@ -41,13 +53,26 @@ export const POST: RequestHandler = async ({ request }) => {
 
 export const GET: RequestHandler = async () => {
   try {
-
-
-    const fs = await import('fs/promises');
-    const configData = await fs.readFile(CONFIG_FILE_PATH, 'utf-8');
-    const config = JSON.parse(configData);
+    // Check if we have runtime config (from previous POST or production)
+    if (runtimeConfig) {
+      return json(runtimeConfig);
+    }
     
-    return json(config);
+    if (dev) {
+      // In development, try to read from file first
+      try {
+        const fs = await import('fs/promises');
+        const configData = await fs.readFile(CONFIG_FILE_PATH, 'utf-8');
+        const config = JSON.parse(configData);
+        return json(config);
+      } catch (readError) {
+        // File doesn't exist, use default
+        return json(defaultConfigData);
+      }
+    } else {
+      // In production, use default config if no runtime config exists
+      return json(defaultConfigData);
+    }
   } catch (error) {
     console.error('Error loading admin config:', error);
     return json(

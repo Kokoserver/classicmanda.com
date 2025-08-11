@@ -146,9 +146,10 @@ export async function loadAdminConfig(): Promise<AdminConfig> {
   }
 
   try {
-    const response = await fetch('/admin-config.json');
+    // Try to load from API endpoint first
+    const response = await fetch('/api/admin/config');
     if (!response.ok) {
-      console.warn('Could not load admin config, using defaults');
+      console.warn('Could not load admin config from API, using defaults');
       cachedConfig = defaultConfig;
       return defaultConfig;
     }
